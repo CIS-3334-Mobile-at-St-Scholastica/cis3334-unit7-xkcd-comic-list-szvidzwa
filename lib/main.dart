@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'XKCD Comics'),
     );
   }
 }
@@ -45,7 +45,18 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Text("Display list here"),
+      body: ListView.builder(
+        itemCount: xkcdComics.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            leading: Image(
+              image: NetworkImage(xkcdComics[index].imgURL),
+            ),
+            title: Text(xkcdComics[index].title),
+            subtitle: Text('Comic #${xkcdComics[index].comicNum}'),
+          );
+        },
+      ),
     );
   }
 }
